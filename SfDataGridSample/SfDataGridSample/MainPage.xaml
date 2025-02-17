@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:datagrid="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
+             xmlns:bottomSheet="clr-namespace:Syncfusion.Maui.Toolkit.BottomSheet;assembly=Syncfusion.Maui.Toolkit"
+             xmlns:buttons="clr-namespace:Syncfusion.Maui.Toolkit.Buttons;assembly=Syncfusion.Maui.Toolkit"
+             xmlns:local="clr-namespace:SfDataGridSample"
+             x:Class="SfDataGridSample.MainPage">
+
+    <ContentPage.BindingContext>
+        <local:EmployeeViewModel x:Name="viewModel" />
+    </ContentPage.BindingContext>
+
+    <Grid>
+        <Grid>
+            <Button Text="ShowBottomSheet" HorizontalOptions="Center" VerticalOptions="Center"
+                    Clicked="Button_Clicked" />
+        </Grid>
+     <!-- Bottom Sheet Section -->
+        <bottomSheet:SfBottomSheet x:Name="bottomSheet"
+                                   HalfExpandedRatio="0.55"
+                                   CollapsedHeight="100"
+                                   AllowedState="All"
+                                   CornerRadius="15, 15, 0, 0">
+            <bottomSheet:SfBottomSheet.BottomSheetContent>
+                <!--Add your content here-->
+            <Grid RowDefinitions="*,48" x:Name="gridLayout"
+                  ColumnDefinitions="*"
+                  Margin="10,-5,10,10" >
+
+                    <StackLayout x:Name="hslDataGrid" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                                           Grid.Row="0">
+                        <datagrid:SfDataGrid AutoGenerateColumnsMode="None"
+                                             GridLinesVisibility="Both"
+                                             HeaderGridLinesVisibility="Both"
+                                             x:Name="dataGrid"
+                                             Margin="0,0,0,0"
+                                             ItemsSource="{Binding Employees}"
+                                             MinimumHeightRequest="0"
+                                             SelectionMode="Single"
+                                             NavigationMode="Cell"
+                                             ColumnWidthMode="Auto"
+                                             HeaderRowHeight="42"
+                                             VerticalOptions="FillAndExpand"
+                                             HorizontalOptions="FillAndExpand"
+                                             RowHeight="42">
+                            <datagrid:SfDataGrid.Columns>
+                                <datagrid:DataGridTextColumn HeaderText="Employee Name"
+                                                             MappingName="Name" />
+                                <datagrid:DataGridNumericColumn  HeaderText="Employee ID"
+                                                                 Format="#"
+                                                                 MappingName="EmployeeID" />
+                                <datagrid:DataGridTextColumn  HeaderText="Designation"
+                                                              MappingName="Title" />
+                                <datagrid:DataGridTextColumn  HeaderText="Gender"
+                                                              MappingName="Gender" />
+                                <datagrid:DataGridTextColumn  HeaderText="Marital Status"
+                                                              MappingName="MaritalStatus" />
+
+                            </datagrid:SfDataGrid.Columns>
+                        </datagrid:SfDataGrid>
+                </StackLayout>
+                    <StackLayout Grid.Row="1">
+                        <buttons:SfButton x:Name="btnSelCon"
+                                      Text="Click Me"
+                                      Clicked="BtnSelCon_OnClicked"
+                                      HorizontalTextAlignment="Center"
+                                      Margin="0,15,0,0"
+                                      Padding="1"
+                                      HeightRequest="30"
+                                      WidthRequest="85" />
+                </StackLayout>
+            </Grid>
+        </bottomSheet:SfBottomSheet.BottomSheetContent>
+    </bottomSheet:SfBottomSheet>
+    <!-- Bottom Sheet Section -->
+    </Grid>
+
+</ContentPage>
